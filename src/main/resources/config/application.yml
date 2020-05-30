@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+
+book:
+  name: 互联网世界观
+  author: 李善友
+  isbn: ${random.uuid}
+  description: ${book.name}

@@ -1,0 +1,11 @@
+#生产环境配置
+server:
+  port: 8081
+#  context-path: /api
+logging:
+  level:
+    root: warn
+    com.lyl: info
+  file:
+    name: logs/my.log
+
