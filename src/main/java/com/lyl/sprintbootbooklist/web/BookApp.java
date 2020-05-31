@@ -92,16 +92,21 @@ public class BookApp {
 //    public List<Book> findByAuthor(@RequestParam String author){
 //        return bookService.findByAuthor(author);
 //    }
-
-
+//
+//
 //    @PostMapping("/books/by")
 //    public List<Book> findByAuthorAndStatus(@RequestParam String author,@RequestParam int status){
 //        return bookService.findByAuthorAndStatus(author,status);
 //    }
 
 
+//    @PostMapping("/books/by")
+//    public List<Book> findByDescriptionEndsWith(@RequestParam String des){
+//        return bookService.findByDescriptionEndsWith(des);
+//    }
     @PostMapping("/books/by")
-    public List<Book> findByDescriptionEndsWith(@RequestParam String des){
-        return bookService.findByDescriptionEndsWith(des);
+    public List<Book> findBy(@RequestParam int len){
+        return bookService.findByJPQL(len);
     }
+
 }
