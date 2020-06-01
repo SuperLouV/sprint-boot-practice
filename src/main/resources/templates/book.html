@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>书单详情</title>
+</head>
+<body th:object="${book}}">
+<div>
+    <P>
+        <strong>书名: </strong><span th:text="*{name}">发明欧洲</span>
+    </P>
+    <P>
+        <strong>作者: </strong><span th:text="*{author}">杰拉德·德朗提</span>
+    </P>
+    <P>
+        <strong>说明: </strong><span th:text="*{description}">欧洲是如何诞生的？欧洲的边界是清晰的吗？真的存在“欧洲人”吗？</span>
+    </P>
+    <P>
+        <strong>状态: </strong><span th:text="*{status}">5</span>
+    </P>
+
+</div>
+
+</body>
+</html>

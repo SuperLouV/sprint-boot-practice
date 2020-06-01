@@ -4,6 +4,7 @@ import com.lyl.sprintbootbooklist.domain.Book;
 import com.lyl.sprintbootbooklist.domain.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
@@ -61,6 +62,20 @@ public class BookService {
 
     public List<Book> findByJPQL(int len){
         return bookRepository.findByJPQL(len);
+    }
+
+    public int updatByJPQL(int status,long id){
+        return bookRepository.uodateByJPQL(status,id);
+    }
+    public int deleteByJPQL(long id){
+        return bookRepository.deleteByJPQL(id);
+    }
+
+    @Transactional      //定义方法为一个事务
+    public int deleteAndUpdate(long id,int status,long uid){
+        int dcount= bookRepository.deleteByJPQL(id);
+        int ucount=bookRepository.uodateByJPQL(status, uid);
+        return dcount+ucount;
     }
 
 }

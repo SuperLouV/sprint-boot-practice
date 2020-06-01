@@ -100,13 +100,18 @@ public class BookApp {
 //    }
 
 
-//    @PostMapping("/books/by")
+    //    @PostMapping("/books/by")
 //    public List<Book> findByDescriptionEndsWith(@RequestParam String des){
 //        return bookService.findByDescriptionEndsWith(des);
 //    }
     @PostMapping("/books/by")
-    public List<Book> findBy(@RequestParam int len){
-        return bookService.findByJPQL(len);
+    public int findBy(@RequestParam long id,@RequestParam int status,@RequestParam long uid) {
+//        return bookService.findByJPQL(len);
+//        return bookService.deleteByJPQL(id);
+        return bookService.deleteAndUpdate(id, status, uid);
     }
+
+
+
 
 }
