@@ -14,6 +14,12 @@
 <body>
 <div class="container">
     <h2 class="page-header">书单列表</h2>
+    <div class="alert alert-success alert-dismissible fade in" th:unless="${#strings.isEmpty(message)}">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success</strong>
+        <span th:text="${message}">提交成功</span>
+    </div>
+    <P class="text-right"><a href="./input.html" th:href="@{/books/input}" class="btn btn-primary">新增</a></P>
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -22,6 +28,7 @@
             <th>作者</th>
             <th>说明</th>
             <th>状态</th>
+            <th>更新</th>
         </tr>
         <tbody>
     <!--iterStat
@@ -32,10 +39,12 @@
 
     -->
 <!--        <tr th:each="book,iterStat:${books}" th:class="${iterStat.even}? 'bg-success'">-->
-         <tr th:each="book,iterStat:${books}">
+         <tr th:each="book,iterStat:${page.content}">
             <td th:text="${iterStat.count}">1</td>
-            <td th:text="${book.name}">书名</td>
-            <td th:text="${book.author}">作者</td>
+<!--            <td><a href="#" th:text="${book.name}" th:href="@{/books/{id}(id=${book.id})}">书名</a></td>-->
+             <td><a href="#" th:text="${book.name}" th:href="@{'/books/'+${book.id}}">书名</a></td>
+
+             <td th:text="${book.author}">作者</td>
             <td th:text="${book.description}">说明</td>
 <!--            <td th:text="${book.status}">状态</td>-->
              <td th:switch="${book.status}">
@@ -44,6 +53,10 @@
                  <span th:case="2">已读</span>
                  <span th:case="*">状态</span>
 
+             </td>
+             <td>
+                 <a href="#" th:href="@{/books/{id}/input(id=${book.id})}">update</a>&nbsp;
+                 <a href="#" th:href="@{/books/{id}/delete(id=${book.id})}">delete</a>
 
              </td>
         </tr>
@@ -54,11 +67,26 @@
         </thead>
 
     </table>
+    <nav>
+        <ul class="pager">
+            <li class="previous"><a href="#" th:href="@{'/books?page='+${page.number-1}}" th:unless="${page.first}">previous</a></li>
+            <li class="next"><a href="#" th:href="@{/books(page=${page.number}+1)}" th:unless="${page.last}">next</a></li>
+
+        </ul>
+    </nav>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script th:href="@{js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script>
+
+    window.setTimeout(function () {
+        $(".alert-success").fadeTo(300, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>
 </body>
 </html>
